@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>고객관리</title>
+    <link rel="stylesheet" href="../css/customer.css">
+    <link rel="stylesheet" href="../css/drink.css">
+    <link rel="stylesheet" href="../css/top-title.css">
+    <link rel="stylesheet" href="../css/pop.css">
+
+    <script>
+        function showPopup() {
+        var popupWidth = 200;
+        var popupHeight = 300;
+
+        var popupX = Math.ceil(( window.screen.width - popupWidth )/2);
+        var popupY = Math.ceil(( window.screen.height - popupHeight )/2); 
+
+        window.open("custpop.html", "cust", 'width=' + popupWidth + ',height=' + popupHeight + ',left='+ popupX + ', top='+ popupY);
+        //   window.open("custpop.html","cust","width=400, height=300, left=100, top=50");
+        }    
+    </script>
+
+
+
+</head>
+
+<body>
+    <header class="top_title">
+        <p>고객관리(리스트)</p>                
+        <div class="circle" onclick="location.href='fhome.html'"></div>
+    </header>
+    
+    <!-- <header>
+        <div class="menu">
+            <p class="menutitle">고객명단(리스트)</p>
+        </div>
+            <div class="circle" onclick="location.href='fhome.html'"></div>
+    </header> -->
+
+    <div class="title_bottom_area">
+        <section class="main_table_wrapper customer">
+            <table class="main_table">
+                <thead>
+                <tr>
+                    <th scope="col">*</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">전화번호</th>
+                    <th scope="col">마일리지</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody id="mainTable"></tbody>
+            </table>
+
+            <!-- <button class="remove_button" type="button" class="add_button">퇴사</button> -->
+
+        </section>
+
+        <section class="search_emp_wrapper">
+            <form name="f">
+                <fieldset class="search_emp">
+                    <p>
+                        <span class="name">이름 : </span> 
+                        <input type="text" name="name" placeholder="이름을입력해주세요">
+                    </p>
+                    <p>
+                        <span class="tel">전화번호 :</span>
+                        <input type="number" name="age" placeholder="전화번호를입력해주세요(ex:20000228)"  />
+                    </p>
+                    <p>
+                        <!-- <button type="button" class="search_button">조회</button> -->
+                        <input class="popbutton" type="button" value="조회" onclick="showPopup();"/>
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+      
+</body>

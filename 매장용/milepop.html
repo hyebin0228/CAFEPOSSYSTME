@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>마일리지 결제</title>
+    <link rel="stylesheet" href="../css/pop.css">
+
+
+    <script>
+        function moveClose(){
+            opener.location.href="customerm.html";
+            self.close();
+        }
+    </script>
+</head>
+
+<body onload="window.resizeTo(800,500)">
+    <p class="miletitle">마일리지로 결제 하시겠습니까 ?</p>
+
+    <div class="close">
+        <input class="mclosebtn" type="button" value="이동후닫기" onclick="moveClose()"/>
+        <input class="closebtn" type="button" value="닫기" onclick="self.close();"/>
+    </div>
+</body>
+
+</html>

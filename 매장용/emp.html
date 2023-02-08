@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>직원작성페이지</title>   
+        <link rel="stylesheet" href="../css/customer.css">
+        <link rel="stylesheet" href="../css/cafe.css"> 
+        <link rel="stylesheet" href="../css/calendar.css">
+        <link rel="stylesheet" href="../css/top-title.css">
+
+
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="../lib/monthpicker/jquery.ui.monthpicker.js"></script>
+        <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+
+    <style type="text/css">
+      fieldset {width: 450px;}
+    </style>
+
+    <script>
+        var anText_sub1 = document.getElementById('info').value;
+    </script>
+
+
+</head>
+    
+  
+<body>
+  <header class="top_title">
+    <p>판매관리</p>                
+    <div class="circle" onclick="location.href='fhome.html'"></div>
+  </header>
+  <!-- <header>
+    <div class="menu">
+      <p class="menutitle">판매관리</p>
+    </div>
+    <div class="circle" onclick="location.href='empm.html'"></div>
+  </header> -->
+  <div class="title_bottom_area">
+    <div class="container h-100" style="padding-top: 2px;">
+      <ul class="list">
+        <li class="sales tab-button active">근무시간작성</li>
+        <li class="sales tab-button">근무일확인</li>
+      </ul>
+
+      <div class="sales tab-content show">
+        <section class="emp main_table_wrapper">
+          <table class="main_table">
+              <thead>
+                <tr>
+                  <th scope="col">이름</th>
+                  <th scope="col">전화번호</th>
+                  <th scope="col">출근시간</th>
+                  <th scope="col">퇴근시간</th>
+                </tr>
+              </thead>
+              <tbody id="empTable"></tbody>
+          </table>
+        </section> 
+
+        <section class="emp add_main_wrapper">
+            <form name="f">
+              <fieldset class="add_emp">
+                <form class="js-form">
+                    <p>
+                        <input type="text" name="name" placeholder="이름을 입력해주세요" />
+                    </p>
+                    <p>
+                        <input type="text" name="tel" placeholder="전화번호를 입력해주세요" />
+                    </p>
+                    <p>
+                        <input type="text" name="stime" placeholder="출근시간을 입력해주세요" />
+                    </p>
+                    <p>
+                        <input type="text" name="etime" placeholder="퇴근시간을 입력해주세요" />
+                    </p>
+                  </form>
+                  <ul class="js-output"></ul>
+                  <script src="fdsfd.js"></script>
+                <!-- <p>
+                    <input typr="text" name="name" placeholder="이름을입력해주세요">
+                </p>
+                <p>
+                    <input type="tel" name="tel"  placeholder="전화번호를입력해주세요"/>
+                </p>
+                <p>
+                    <input type="number" name="ftime"  placeholder="출근시간을입력해주세요"/>
+                </p>
+                <p>
+                    <input type="number" name="etime"  placeholder="퇴근시간을입력해주세요"/>
+                </p>
+    
+                <p>
+                    <button type="button" class="add_button" onclick="send_go()">추가</button>
+                </p> -->
+              </fieldset>
+            </form>
+        </section>
+        </div>
+          
+        
+    
+      
+
+      <div class="sales tab-content">
+        <div class="sec_cal">
+          <div class="cal_nav">
+            <a href="javascript:;" class="nav-btn go-prev">prev</a>
+            <div class="year-month"></div>
+            <a href="javascript:;" class="nav-btn go-next">next</a>
+          </div>
+          <div class="cal_wrap">
+            <div class="days">
+              <div class="day">MON</div>
+              <div class="day">TUE</div>
+              <div class="day">WED</div>
+              <div class="day">THU</div>
+              <div class="day">FRI</div>
+              <div class="day">SAT</div>
+              <div class="day">SUN</div>
+            </div>
+            <div class="dates"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+
+
+  /*
+      달력 렌더링 할 때 필요한 정보 목록 
+
+      현재 월(초기값 : 현재 시간)
+      금월 마지막일 날짜와 요일
+      전월 마지막일 날짜와 요일
+  */
+
+  function calendarInit() {
+
+    // 날짜 정보 가져오기
+    var date = new Date(); // 현재 날짜(로컬 기준) 가져오기
+    var utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // uct 표준시 도출
+    var kstGap = 9 * 60 * 60 * 1000; // 한국 kst 기준시간 더하기
+    var today = new Date(utc + kstGap); // 한국 시간으로 date 객체 만들기(오늘)
+  
+    var thisMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    // 달력에서 표기하는 날짜 객체
+  
+    
+    var currentYear = thisMonth.getFullYear(); // 달력에서 표기하는 연
+    var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
+    var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
+
+    // kst 기준 현재시간
+    // console.log(thisMonth);
+
+    // 캘린더 렌더링
+    renderCalender(thisMonth);
+
+    function renderCalender(thisMonth) {
+
+      // 렌더링을 위한 데이터 정리
+      currentYear = thisMonth.getFullYear();
+      currentMonth = thisMonth.getMonth();
+      currentDate = thisMonth.getDate();
+
+      // 이전 달의 마지막 날 날짜와 요일 구하기
+      var startDay = new Date(currentYear, currentMonth, 0);
+      var prevDate = startDay.getDate();
+      var prevDay = startDay.getDay();
+
+      // 이번 달의 마지막날 날짜와 요일 구하기
+      var endDay = new Date(currentYear, currentMonth + 1, 0);
+      var nextDate = endDay.getDate();
+      var nextDay = endDay.getDay();
+
+      // console.log(prevDate, prevDay, nextDate, nextDay);
+
+      // 현재 월 표기
+      $('.year-month').text(currentYear + '.' + (currentMonth + 1));
+
+      // 렌더링 html 요소 생성
+      calendar = document.querySelector('.dates')
+      calendar.innerHTML = '';
+      
+      // 지난달
+      for (var i = prevDate - prevDay + 1; i <= prevDate; i++) {
+        calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
+      }
+      // 이번달
+      for (var i = 1; i <= nextDate; i++) {
+        calendar.innerHTML = calendar.innerHTML + '<div class="day current">' + i + '<br> <span class="time"> 4시간 </span>' + '</div>'
+      }
+      // 다음달
+      for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
+        calendar.innerHTML = calendar.innerHTML + '<div class="day next disable">' + i + '</div>'
+      }
+
+      // 오늘 날짜 표기
+      if (today.getMonth() == currentMonth) {
+        todayDate = today.getDate();
+        var currentMonthDate = document.querySelectorAll('.dates .current');
+        currentMonthDate[todayDate -1].classList.add('today');
+      }
+
+
+    }
+
+    // 이전달로 이동
+    $('.go-prev').on('click', function() {
+      thisMonth = new Date(currentYear, currentMonth - 1, 1);
+      renderCalender(thisMonth);
+    });
+
+    // 다음달로 이동
+    $('.go-next').on('click', function() {
+      thisMonth = new Date(currentYear, currentMonth + 1, 1);
+      renderCalender(thisMonth); 
+    });
+  }
+
+
+  for(let i = 0; i < $('.sales.tab-button').length; i++){
+    tabOpen(i); 
+  }
+
+//함수에 보관
+  function tabOpen(e){
+    $('.sales.tab-button').eq(e).click(function(){
+      $('.sales.tab-button').removeClass('active');
+      $('.sales.tab-content').removeClass('show');
+      $('.sales.tab-button').eq(e).addClass('active');
+      $('.sales.tab-content').eq(e).addClass('show');
+    });
+  }
+</script>
+
+</html>

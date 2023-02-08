@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>매출관리</title>
+    <link rel="stylesheet" href="../css/customer.css"> 
+    <link rel="stylesheet" href="../css/cafe.css">
+    <link rel="stylesheet" href="../css/top-title.css">
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+    <!-- // jQuery UI CSS파일  -->
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
+    <!-- // jQuery 기본 js파일 -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+    <!-- // jQuery UI 라이브러리 js파일 -->
+    <!-- <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> -->
+
+
+    <script src="../lib/monthpicker/jquery.ui.monthpicker.js"></script>
+</head>
+
+<body>
+
+  <header class="top_title">
+    <p>매출관리</p>                
+    <div class="circle" onclick="location.href='fhome.html'"></div>
+  </header>
+
+  <!-- <header>
+    <div class="menu">
+      <p class="menutitle">매출관리</p>
+    </div>
+    <div class="circle" onclick="location.href='fhome.html'"></div>
+  </header> -->
+  
+  <!-- <div class="tabmenu out-tabmenu">
+    
+    <ul>
+      
+      <li id="tab1" class="btnCon"> 
+        <input type="radio" checked name="tabmenu" id="tabmenu1">
+        <label for="tabmenu1">일일매출</label>
+
+        <div class="tabCon" >
+          <input type="text" id="datepicker">
+          <div>
+            단일 달력<br />
+            <input type="text" id="datepicker">1
+          </div>
+
+          <p>NO  날짜  항목  수량  금액</p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          <p>___일  매출은 _____원입니다.</p> 
+          <form>
+            <p><input type="date"></p>
+            <p><input type="submit" value="Submit"></p>
+          </form> 
+        </div>    
+      </li>
+      <li id="tab2" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu2">
+        <label for="tabmenu2">월매출</label>
+        <div class="tabCon" >
+            메뉴2
+        </div>
+    </ul>
+  </div> -->
+
+  <div class="title_bottom_area container h-100">
+    <ul class="list" style="padding-top: 2px;">
+      <li class="tab-button active">일일매출</li>
+      <li class="tab-button">월매출</li>
+    </ul>
+  
+    <div class="tab-content show">
+      <p style="padding-top: 25px;">검색하실 날짜를 선택하여주세요 .</p>
+      <div class="datepicker">
+        <input type="text" id="datepicker">
+      </div>
+      <section class="main_table_wrapper sales_table_wrapper">
+        <table class="main_table sales_table">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 20px;">*</th>
+              <th scope="col">날짜</th>
+              <th scope="col">항목</th>
+              <th scope="col">수량</th>
+              <th scope="col">금액</th>
+            </tr>
+          </thead>
+          <tbody id="mainTable"></tbody>
+        </table>
+      </section>
+      
+      <div class="emp_bottom_area">
+        <input type="text"  > 일 매출은  _________원 입니다 .
+      </div>
+
+    </div>
+
+    <div class="tab-content">
+      <p style="padding-top: 25px;">검색하실 월을 선택하여주세요 .</p>
+      <div class="datepicker">
+        <input type="text" id="monthpicker">
+      </div>
+      <section class="main_table_wrapper sales_table_wrapper">
+        <table class="main_table sales_table">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 20px;">*</th>
+              <th scope="col">날짜</th>
+              <th scope="col">항목</th>
+              <th scope="col">수량</th>
+              <th scope="col">금액</th>
+            </tr>
+          </thead>
+          <tbody id="mainTable"></tbody>
+        </table>
+      </section>
+      
+      <div class="emp_bottom_area">
+        <input type="text"  > 월 매출은  _________원 입니다 .
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  //script구문 내부에 해당 메소드를 입력합니다.
+// $(function() {
+//     $( "#datepicker" ).datepicker({
+//     });
+// });
+$(document).ready(function() {
+    $('#datepicker').datepicker({
+      format: "yyyy-mm-dd"
+      , endDate: '0d'	// 금일 이후 날짜 선택되지 않게 설정
+      , autoclose: true
+      , language : "kr"
+      , todayBtn: "linked"
+      , orientation: "bottom"
+      , todayHighlight: true
+      , toggleActive : true
+    }).on('changeDate' , function(e){
+    	// 날짜변경시 실행됨
+    });
+
+    $("#monthpicker").monthpicker({
+      monthNames: ['1월(JAN)', '2월(FEB)', '3월(MAR)', '4월(APR)', '5월(MAY)', '6월(JUN)',
+          '7월(JUL)', '8월(AUG)', '9월(SEP)', '10월(OCT)', '11월(NOV)', '12월(DEC)'],
+      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      showOn: "button",
+      // buttonImage: "../../Images/Goods/calendar.jpg",
+      // buttonImageOnly: true,
+      changeYear: false,
+      yearRange: 'c-2:c+2',
+      dateFormat: 'yy-mm'
+    });
+  });
+
+  for(let i = 0; i < $('.tab-button').length; i++){
+    tabOpen(i); 
+  }
+
+//함수에 보관
+function tabOpen(e){
+    $('.tab-button').eq(e).click(function(){
+        $('.tab-button').removeClass('active');
+        $('.tab-content').removeClass('show');
+        $('.tab-button').eq(e).addClass('active');
+        $('.tab-content').eq(e).addClass('show');
+    });
+}
+</script>
+
+</html>

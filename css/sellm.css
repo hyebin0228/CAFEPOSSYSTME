@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+/* :root{
+  background-color:beige;
+} */
+
+body {
+  height: 100vh;
+  margin: 0 !important;
+  background-color:beige !important;
+}
+
+button.close_button {
+  border-color: transparent;
+  background-color: #545151e3;
+  color: white;
+  border-radius: 5px;
+}
+
+div.main_area {
+  display: flex;
+  padding: 10px;
+  height: calc(100% - 30px);
+}
+
+div.main_area div.main_menu {
+  border-right: dotted grey;
+  width: 50%;
+}
+
+div.main_area div.main_menu div.button_area {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+
+div.main_area div.main_menu div.button_area button {
+  width: 37%;
+  border-color: #9895958f;
+  padding: 25px;
+  font-size: 18px;
+  border: none;
+  font-weight: bolder;
+  background-color: #666360;
+  color: #e1e1e1;
+  margin-right: 5px;
+  border-radius: 10px;
+}
+
+div.main_area div.main_menu div.total_cost {
+  padding-top: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+div.main_area div.main_menu div.total_cost span:nth-child(2) {
+  text-decoration: underline;
+  margin-left: 25px;
+}
+
+div.main_area div.main_menu_list {
+  width: 50%;
+  padding: 5px;
+}
+
+div.main_area div.main_menu_list div.menu_list {
+  height: calc(100% - 100px);
+  overflow-y: auto;
+}
+
+div.main_area div.main_menu_list div.menu_list button {
+  width: 32%;
+  height: 90px;
+  margin-bottom: 10px;
+  background-color: #cbcbcb73;
+  border: none;
+  border-radius: 10px;
+  color: #4f4f4f;
+  font-weight: bolder;
+  transition: all 0.3s;
+  margin-right: 5px;
+}
+
+div.main_area div.main_menu_list div.menu_list button:hover {
+  background-color: #e9e9e394;
+  box-shadow: 1px 0px 2px #e3e3d5;
+}
+
+div.main_area div.main_menu_list div.mile_button {
+  height: 60px;
+}
+
+div.main_area div.main_menu_list div.mile_button .popbutton{
+  width: 32%;
+  height: 100%;
+  border: none;
+  font-weight: bolder;
+  background-color: #666360;
+  color: #e1e1e1;
+  border-radius: 10px;
+  transition: all 0.3s;
+  font-size: 18px;
+}
+
+div.main_area div.main_menu_list div.mile_button .popbutton:hover {
+  opacity: 0.8;
+}
+
+div.main_area div.main_menu_list div.mile_button button {
+  width: 32%;
+  height: 100%;
+  border: none;
+  font-weight: bolder;
+  background-color: #666360;
+  color: #e1e1e1;
+  border-radius: 10px;
+  transition: all 0.3s;
+  font-size: 18px;
+}
+
+
+div.main_area div.main_menu_list div.mile_button button:hover {
+  opacity: 0.8;
+}
+
+section.sellm.custom_table_wrapper {
+  height: calc(100% - 160px);
+  border-bottom: dotted grey;
+}

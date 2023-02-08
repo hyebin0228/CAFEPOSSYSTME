@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+ 
+:root{
+  background-color:beige;
+}
+
+div.main_title{
+  font-family: 'Poor Story', cursive;
+  text-align: center;
+  padding: 50px;
+  height: 70px;
+}
+
+div.main_title span{
+  font-size: 50px;
+}
+
+section.main_button{
+  text-align: center;
+  height: calc(100% - 300px);
+  display: flex;
+  justify-content: center;
+  padding-top: 71px;
+  align-items: center;
+}
+
+.main_button button{
+  font-family: 'Poor Story', cursive;
+  font-weight: bold;
+  color: #000000 !important;
+  font-size: 70px;
+  padding: 200px 200px;
+  border-radius: 26px;
+  border: 0px ;
+  background: #EED9CD;
+  transition: all 0.3s;
+}
+
+.main_button button:first-child {
+  margin-right: 100px !important;
+}
+
+section.main_button button:hover {
+  background: #FFFFFF;
+}
+
+.main_button {
+  background-color:beige;
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>판매관리</title>
+    <!-- <link rel="stylesheet" href="../css/customer.css">  -->
+    <link rel="stylesheet" href="../css/sellm.css">
+    <link rel="stylesheet" href="../css/customer.css">
+    <link rel="stylesheet" href="../css/cafe.css">
+
+    <link rel="stylesheet" href="../css/top-title.css">
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <script language="javascript">
+            
+      let menus = [ /* num: primary key, name: 메뉴 이름, cost: 해당 메뉴의 가격*/
+        { num: 1, name: 'Ice 아메리카노', cost: 2000 },
+        { num: 2, name: 'Hot 아메리카노', cost: 1500 },
+        { num: 3, name: 'Ice 바닐라라떼', cost: 3000 },
+        { num: 4, name: 'Hot 바닐라라떼', cost: 2500 },
+        { num: 5, name: 'Ice 카라멜마키야또', cost: 3500 },
+        { num: 6, name: 'Hot 카라멜마키야또', cost: 3000 }
+      ];
+
+      let clicked_menu = [];
+
+      window.onload = function () {
+          loadMenuData();
+          lenderTotalMenuCost();
+      };   
+
+      function lenderTotalMenuCost() {
+        let total_menu_cost = 0;
+        if(clicked_menu.length >= 1) {
+          for(let item of clicked_menu) {
+            total_menu_cost += item.total_cost;
+          }
+        }
+
+        document.getElementById('total_menu_cost').innerHTML = total_menu_cost.toLocaleString() + '원';
+      }
+
+      function loadMenuData() {
+        // DB 로드 코드 작성
+        renderMenuElement(menus);
+      }
+
+      function renderMenuElement(data) {
+        let element = '';
+        for(let menu of data) {
+          const name = menu.name.split(' ');
+          element += `<button type="button" onclick="onClickMenuButton(${menu.num})"> ${name[0]} <br> ${name[1]} <br> ${menu.cost}원 </button>`;
+        }
+        document.getElementsByClassName('menu_list')[0].innerHTML = element;
+      }
+
+      // 메뉴 버튼 클릭 이벤트
+      async function onClickMenuButton(value) { /* value: 클릭한 메뉴의 primary key 값*/ 
+        const find_menu = menus.find(v=> v.num == value);
+        console.log('find_menu', find_menu);
+
+        let find_menu_list = clicked_menu.find(v => v.num == find_menu.num);
+
+        if(find_menu_list) {
+          Object.assign( find_menu_list, { count: find_menu_list.count + 1, total_cost: find_menu_list.cost * (find_menu_list.count + 1) });
+        } else {
+          clicked_menu.push(Object.assign(find_menu, { count: 1, total_cost: find_menu.cost }));
+        }
+        
+        console.log('clicked_menu: ', clicked_menu);
+        await renderMenuListTable('menuListTable', clicked_menu);
+        await lenderTotalMenuCost();
+      }
+
+      function renderMenuListTable(id, data) {
+            let trList = "";
+
+            for(const i of data) {
+                trList += makeTableElement(i);
+            }
+            document.querySelector("#" + id).innerHTML = trList;
+        }
+
+        function makeTableElement(row) {
+            var tr = "";
+            tr += "<tr>";
+            tr += " <td>" + row.num + "</td>";
+            tr += " <td>" + row.name + "</td>";
+            tr += " <td>" + row.count + "</td>";
+            tr += " <td>" + row.cost.toLocaleString() + "</td>";
+            tr += " <td>" + row.total_cost.toLocaleString() + "</td>";
+            tr += " <td> <input type='checkbox' value= " + row.no + ">  </td>"
+
+            tr += "</tr>";
+
+            return tr;
+        }
+
+      //   function delrow() {
+			// 	var tbl = document.getElementById("table");
+			// 	var custom_table = document.getElementsByName("custom_table");
+				
+			// 	for(i=0; i<custom_table.length;i++){
+			// 		if(custom_table[i].checked){
+			// 			tbl.deleteRow(custom_table);
+			// 			i=i-1;
+			// 		}
+			// 	}
+			// }
+
+        
+        function showmilePopup() {
+          window.open("milepop.html","mile","width=400, height=300, left=100, top=50");
+        }
+
+        function showcashPopup() {
+          window.open("cashpop.html","card","width=400, height=300, left=100, top=50");
+        }
+
+        function showcardPopup() {
+          window.open("cardpop.html","card","width=400, height=300, left=100, top=50");
+        }
+
+    </script>
+
+</head>
+
+<body>
+  <header class="top_title">
+    <p>판매관리</p>                
+    <div class="circle" onclick="location.href='fhome.html'"></div>
+  </header>
+    <!-- <header>
+      <div class="menu">
+        <p class="menutitle">판매관리</p>
+      </div>
+        <div class="circle" onclick="location.href='fhome.html'"></div>
+    </header> -->
+
+    <div class="title_bottom_area main_area">
+        <div class="main_menu">
+          <section class="sellm custom_table_wrapper">
+            <table class="custom_table">
+                <thead>
+                  <tr>
+                    <th scope="col">*</th>
+                    <th scope="col">메뉴명</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">단가</th>
+                    <th scope="col">금액</th>
+
+                  </tr>
+                </thead>
+                <tbody id="menuListTable">
+                </tbody>
+              </table>
+            </section>
+
+            <!-- 전체 취소 버튼 등등 -->
+            <div class="button_area">
+                <button class="">전체 취소</button>
+                <button class="">선택 취소</button>
+            </div>
+
+            <!-- 총금액 -->
+            <div class="total_cost">
+                <span>총 금액</span>
+                <span id="total_menu_cost"></span>
+            </div>
+
+        </div>
+
+        <!-- 메뉴 리스트 -->
+        <div class="main_menu_list">
+            <div class="menu_list">
+            </div>
+
+            <div class="mile_button">
+                <!-- <button>마일리지</button> -->
+                <input class="popbutton" type ="button" value="마일리지" onclick="showmilePopup();"/>
+                <!-- <button>현금</button> -->
+                <input class="popbutton" type ="button" value="현금" onclick="showcashPopup();"/>
+                <!-- <button>카드</button> -->
+                <input class="popbutton" type ="button" value="카드" onclick="showcardPopup();"/>
+
+            <!-- <div id="pop_mile" class="pop_wrap" style="display:none;">
+              <div class="pop_inner">
+                <p class="dsc">마일리지로 결제하시겠습니까 ?</p>
+                <button type="button" class="btn_close">x</button>
+              </div>
+            </div> -->
+            </div>
+            
+        </div>
+  </div>
+</body>

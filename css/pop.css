@@ -1,0 +1,37 @@
+:root{
+    background-color:beige;
+}
+
+p.miletitle,
+p.cashtitle,
+p.cardtitle,
+p.custtitle {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+div.close {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+}
+
+div.close .closebtn,
+div.close .mclosebtn {
+    width: 86px;
+    height: 36px;
+    background-color: #7e7e7e;
+    color: #f9f9f9;
+    font-weight: 600;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div.close .closebtn,
+div.close .mclosebtn {
+    margin-right: 10px;
+}
+

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+
+
+.drink{
+    text-align:center;
+    font-size: 150px; 
+    display: flex;
+    justify-content: center;
+}
+.drink ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.drink ul::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.drink li{
+    float: left;
+}
+
+.drink li a{
+    display: block;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.drink li a:hover:not(.active){
+  background-color: rgb(238, 215, 150);
+}
+
+.drink li a.hilight {
+  background-color: rgb(238, 215, 150);
+}
+
+.active{
+  background-color: blueviolet;
+}
+
+.menu_button{
+  padding: 1px;
+  text-align:left;
+  margin-top: 1px;
+  vertical-align: middle;
+  align-items: left;
+  width:15%;
+  float: left;
+}
+
+.menu_button button{
+  font-family: 'Poor Story', cursive;
+  font-weight: bold;
+  color: #000000 !important;
+  font-size: 30px;
+  height: 230px;
+  width: 70px;
+  padding: 20px 20px;
+  margin: 15px;
+  border-radius: 26px;
+  border: 0px;
+  background: #EED9CD;
+}
+
+.recommend{
+  width:100%;
+  padding: 1px;
+  height: 200px;
+  text-align: center;
+}
+
+.recommend p {
+    font-family: 'Poor Story', cursive;
+    font-size: 30px;
+}
+
+.recommend div.menu_list {
+  display: flex;
+}
+
+.recommend div.menu_list div.menu {
+  width: 32%;
+}
+
+.menu_button button:hover {
+  background: #FFFFFF;
+}
+
+div.left {
+  float: left;
+  display: inline-block;
+}
+
+div.right {
+  display: inline-block;
+  width: calc(100% - 110px);
+  height: calc(100% - 210px);
+}
+
+div.member.border {
+  border: 3px solid #7e7e7e;
+  border-radius: 10px;
+  height: calc(100% - 40px);
+  width: calc(100% - 30px);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+div.member.border input {
+  border: 0;
+  border-bottom: 1px solid#414141fc;
+  background-color: transparent;
+}
+
+div.name button{
+  background-color: #7e7e7e;
+  color: #f9f9f9;
+  font-weight: 600;
+  border: 0;
+  border-radius: 5px;
+  width: 80px;
+  height: 40px;
+}

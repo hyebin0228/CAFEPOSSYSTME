@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>관리자</title>
+    <link rel="stylesheet" href="../css/customer.css"> 
+    <link rel="stylesheet" href="../css/drink.css">
+    <link rel="stylesheet" href="../css/sellm.css">
+
+    <link rel="stylesheet" href="../css/top-title.css">
+    <link rel="stylesheet" href="../css/table.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    
+    <style type="text/css">
+        fieldset {width: 450px;}
+    </style>
+
+    <script type="text/javascript">
+        
+        const empList = [
+            { no: 1, name: "신혜빈", age: "20220228", tel:"010-0000-0000", date: "20220228", sel: "10000" },
+        
+        ];
+        
+        function loadEmpData() {
+            // db에서 data 로드
+            rendermainTable("mainTable", empList);
+        }
+
+        function rendermainTable(id, data) {
+            let trList = "";
+
+            for(const i of data) {
+                trList += makeTableElement(i);
+            }
+            document.querySelector("#" + id).innerHTML = trList;
+        }
+
+        function makeTableElement(row) {
+            var tr = "";
+            tr += "<tr>";
+            tr += " <td>" + row.no + "</td>";
+            tr += " <td>" + row.name + "</td>";
+            tr += " <td>" + row.age + "</td>";
+            tr += " <td>" + row.tel + "</td>";
+            tr += " <td>" + row.date + "</td>";
+            tr += " <td>" + row.sel + "</td>";
+            tr += " <td> <input type='checkbox' value= " + row.no + ">  </td>"
+            tr += "</tr>";
+
+            return tr;
+        }
+
+        window.onload = function () {
+            loadEmpData();
+        };
+
+        function send_go(){
+            const name = document.f.name.value;
+            const age = document.f.age.value;
+            const tel = document.f.tel.value;
+            const date = document.f.date.value;
+            const sel = document.f.sel.value;
+
+            empList.push({ no: empList.length + 1, name: name, age: age, tel: tel, date: date, sel: sel })
+
+            rendermainTable("mainTable", empList);
+        };
+
+        // function removeEmp() {
+        //     const selected = document.querySelectorAll('input[type="checkbox"]:checked');
+        // }
+
+
+        // var del = document.querySelector(".del"); 체크박스 체크 삭제
+
+        // del.onclick = () => {
+        //     for(var i=0; i<list.length; i++){
+        //         if(list[i].checked){
+        //             list[i].parentElement.parentElement.remove();
+        //         }
+        //     }
+        // }
+
+
+    </script>
+</head>
+
+<body>
+    <header class="top_title">
+        <p>직원관리</p>                
+        <div class="circle" onclick="location.href='fhome.html'"></div>
+    </header>
+
+    <div class="title_bottom_area exist_bottom">
+        <section class="custom_table_wrapper">
+            <table class="custom_table">
+                <thead>
+                <tr>
+                    <th scope="col">*</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">생년월일</th>
+                    <th scope="col">전화번호</th>
+                    <th scope="col">입사일</th>
+                    <th scope="col">시급</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody id="mainTable"></tbody>
+            </table>
+
+            <!-- <button class="remove_button" type="button" class="add_button">퇴사</button> -->
+
+        </section>
+
+        <section class="remove_button">
+            <button class="remove_button" type="button" class="add_button" onclick="removeEmp()">퇴사</button>
+            <!-- <button type="button" class="del">퇴사</button> -->
+        </section>
+
+
+        <section class="mini_bottom_content add_emp_wrapper">
+            <form name="f">
+                <fieldset class="add_emp">
+    
+                    <p>
+                        <input type="text" name="name" placeholder="이름을입력해주세요">
+                    </p>
+                    <p>
+                        <input type="number" name="age" placeholder="생년월일을입력해주세요"  />
+                    </p>
+                    <p>
+                        <input type="tel" name="tel"  placeholder="전화번호를입력해주세요"/>
+                    </p>
+                    <p>
+                        <input type="number" name="date"  placeholder="입사날짜를입력해주세요"/>
+                    </p>
+                    <p>
+                        <input type="number" name="sel"  placeholder="시급을입력해주세요"/>
+                    </p>
+
+                    <p>
+                        <button type="button" class="add_button" onclick="send_go()">추가</button>
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
